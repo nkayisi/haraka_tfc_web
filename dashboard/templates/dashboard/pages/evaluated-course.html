@@ -1,0 +1,125 @@
+{% extends 'dashboard/layouts/_dashboard.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block dashboardContent %}
+    <div id="evaluated-course">
+
+        <div class="search pb-3 mx-auto w-50">
+            <input type="text" class="form-control rounded-pill mx-auto" id="search" placeholder="Rechercher un cours...">
+        </div>
+
+        <div class="row p-0 m-0">
+            <div class="col-md-12 pe-0 ps-0">
+                <h4 class="list-group-item list-group-item-secondary m-0" aria-current="true">
+                    Cours
+                    <button class="btn btn-add add-course btn-sm rounded-pill list-group-item-warning float-end text-dark" 
+                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        + Ajouter
+                    </button>
+                </h4>
+                
+                <ul class="list-group list-group-flush" id="course-content">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                    </div>
+                </ul>
+
+
+            </div>
+            
+
+            <!-- Add course modal -->
+            
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h4 class="modal-title" id="staticBackdropLabel">Ajouter un cours à évalué</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <form action="" method="POST" id="addCourseForm">
+                            {% csrf_token %}
+
+                            <h6 class="mb-0 mt-2 text-center grey">Infos sur le Cours a évalué</h6>
+                            <hr class="mt-1 grey w-75 mx-auto">
+                            
+                            <div class="mt-1">
+                                {{ course_form.label.label }} :
+                                {{ course_form.label }}
+                            </div>
+
+                            <div class="mt-1">
+                                {{ course_form.hours.label }} :
+                                {{ course_form.hours }}
+                            </div>
+
+                            <div class="mt-1">
+                                {{ course_form.faculty.label }} :
+                                {{ course_form.faculty }}
+                            </div>
+
+                            <div class="mt-1">
+                                {{ course_form.promotion.label }} :
+                                {{ course_form.promotion }}
+                            </div>
+
+
+                            <h6 class="mb-0 mt-4 text-center grey">Infos sur l'enseignant du cours</h6>
+                            <hr class="mt-1 grey w-75 mx-auto">
+
+                            <div class="d-flex justify-content-md-around mb-3">
+                                <div class="form-check p-0 m-0">
+                                    <input class="form-check-input cursor" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label cursor" for="flexRadioDefault1">Enseignant existant</label>
+                                </div>
+                                <div class="form-check p-0 m-0">
+                                    <input class="form-check-input cursor" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                    <label class="form-check-label cursor" for="flexRadioDefault2">Nouveau enseignant</label>
+                                </div>
+                            </div>
+
+                            <div id="old-teacher-info">
+                                <div class="mt-1">
+                                    {{ course_form.teacher.label }} :
+                                    {{ course_form.teacher }}
+                                </div>
+                            </div>
+
+                            <div id="new-teacher-info">
+
+                                {% for field in teacher_form %}
+                                    <div class="mt-1">
+                                        {{ field.label}}
+                                        {{ field }}
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+
+                            <div class="mt-4 float-end">
+                                <button type="button" class="btn list-group-item-danger mx-2" data-bs-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn list-group-item-success mx-2" id="save-btn">Sauvegarder</button>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+
+                </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock dashboardContent %}
+
+
+{% block script %}
+    <script type="module" src=" {% static 'dashboard/js/evaluatedCourse.js' %} "></script>
+{% endblock script %}

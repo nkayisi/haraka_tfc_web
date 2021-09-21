@@ -1,0 +1,21 @@
+{% load static %}
+<nav class="row mb-3">
+
+    <div class="col-md-2 text-start">
+        <img src="{% static 'dashboard/img/logo.png' %}" class="ms-2" style="max-width: 100px; height: auto;">
+    </div>
+
+    <div class="col-md-8 text-center list-group-item-secondary">
+        <h1 class="mt-4">UNIVERSITE CHRETIENNE BILINGUE DU CONGO</h1>
+    </div>
+
+        
+    <div class="col-md-2 text-end">
+        {% if user.is_authenticated %}
+            <a href="{% url 'dashboard-quesRes' %}" class="btn btn-dark px-5 mt-5 mb-5">Dashboard</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-dark px-5 mt-5 mb-5">Connexion</a>
+        {% endif %}
+    </div>
+
+</nav>

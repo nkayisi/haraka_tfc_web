@@ -1,0 +1,40 @@
+{% extends 'dashboard/layouts/_dashboard.html' %}
+
+
+{% load static %}
+
+{% block dashboardContent %}
+
+    <div>
+
+        <div class="search pb-3 mx-auto w-50">
+            {% csrf_token %}
+            <input type="text" class="form-control mx-auto rounded-pill" id="search" placeholder="Rechercher un cours...">
+        </div>
+
+        <div class="row p-0 m-0">
+            <div class="col-md-6 pe-0 ps-0">
+                <h4 class="list-group-item list-group-item-secondary m-0" aria-current="true">
+                    Cours
+                </h4>
+                <ul class="list-group list-group-flush" id="course-content">
+                </ul>
+            </div>
+            <div class="col-md-6 pe-0">
+                <h4 class="list-group-item list-group-item-secondary m-0" aria-current="true">
+                    Commentaires
+                </h4>
+                <ul class="list-group list-group-flush p-3" id="comments-content">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock dashboardContent %}
+
+
+
+{% block script %}
+    <script type="module" src="{% static 'dashboard/js/comments.js' %}"></script>
+{% endblock script %}
+    

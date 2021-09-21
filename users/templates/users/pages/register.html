@@ -1,0 +1,30 @@
+{% extends 'evaluation/layouts/_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Register{% endblock title %}
+
+{% block content %}
+
+    <div class="card-body mx-auto w-50 p-5">
+        <div class="card-body">
+            <h1 class="text-center border-bottom mb-4">Créer un compte</h1>
+        </div>
+        <form method="POST" class="w-75 mx-auto">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group mt-3 text-center">
+                <button type="submit" class="btn btn-outline-info px-5">Crée un compte</button>
+            </div>
+        </form>
+        <div class="border-top pt-3 mt-3 text-center">
+            <small class="text-muted">
+                Vouz avez déjà un compte ? <a class="ms-2" href="{% url 'login' %}">Connecez-vous</a>
+            </small>
+        </div>
+    </div>
+
+{% endblock content %}
+    

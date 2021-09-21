@@ -1,0 +1,120 @@
+{% extends 'dashboard/layouts/_dashboard.html' %}
+
+
+{% load static %}
+
+{% block dashboardContent %}
+
+    <div>
+
+        <div class="search pb-3 mx-auto w-50">
+            <input type="text" class="form-control mx-auto rounded-pill" id="search" placeholder="Rechercher une faculté...">
+        </div>
+
+        <div class="row p-0 m-0">
+            <div class="col-md-7 pe-0 ps-0">
+                <h4 class="list-group-item list-group-item-secondary m-0" aria-current="true">
+                    Facultés
+                    <button class="btn btn-add add-faculty btn-sm rounded-pill list-group-item-warning float-end" 
+                    data-bs-toggle="modal" data-bs-target="#facultyModal">
+                        + Ajouter
+                    </button>
+                </h4>
+                <ul class="list-group list-group-flush" id="faculty-content">
+                </ul>
+            </div>
+            <div class="col-md-5 pe-0">
+                <h4 class="list-group-item list-group-item-secondary m-0" aria-current="true">
+                    Promotions
+                    <button class="btn btn-add add-promotion btn-sm rounded-pill list-group-item-warning float-end" 
+                    data-bs-toggle="modal" data-bs-target="#promotionModal">
+                        + Ajouter
+                    </button>
+                </h4>
+                <ul class="list-group list-group-flush" id="promotion-content">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add faculty modal -->
+            
+    <!-- Modal -->
+    <div class="modal fade" id="facultyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Ajout d'une faculté</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form action="" method="POST" id="addFacultyForm">
+                    {% csrf_token %}
+                    
+                    {% for field in fac_form %}
+                        <div class="mt-1 mx-auto">
+                            {{ field.label }} :
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+
+                    <div class="mt-4 float-end">
+                        <button type="button" class="btn list-group-item-danger mx-2" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn list-group-item-success mx-2" id="save-facBtn">Sauvegarder</button>
+                    </div>
+                    
+                </form>
+                
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+
+    <!-- Add promotion modal -->
+            
+    <!-- Modal -->
+    <div class="modal fade" id="promotionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Ajout d'une promotion</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form action="" method="POST" id="addPromotionForm">
+                    {% csrf_token %}
+                    
+                    {% for field in prom_form %}
+                        <div class="mt-1 mx-auto">
+                            {{ field.label }} :
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+
+                    <div class="mt-4 float-end">
+                        <button type="button" class="btn list-group-item-danger mx-2" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn list-group-item-success mx-2" id="save-btn">Sauvegarder</button>
+                    </div>
+                    
+                </form>
+                
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+{% endblock dashboardContent %}
+
+
+
+{% block script %}
+    <script type="module" src="{% static 'dashboard/js/fac_prom.js' %}"></script>
+{% endblock script %}
+    

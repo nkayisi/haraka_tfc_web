@@ -1,0 +1,21 @@
+/* body {
+    background-color: rgb(253, 251, 251);
+} */
+
+.hover {
+    cursor: pointer;
+    
+}
+
+.hover:hover {
+    background-color: #f6f6f6;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.area_fixed {
+    max-height: 100px !important;
+    min-height: 100px !important;
+}

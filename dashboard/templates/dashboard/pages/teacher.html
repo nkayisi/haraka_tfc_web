@@ -1,0 +1,85 @@
+{% extends 'dashboard/layouts/_dashboard.html' %}
+
+
+{% load static %}
+
+{% block dashboardContent %}
+
+    <div>
+
+        <div class="search pb-3 mx-auto w-50">
+            <input type="text" class="form-control mx-auto rounded-pill" id="search" placeholder="Rechercher un enseignant...">
+        </div>
+
+        <div class="card mb-4 list-group-item-light w-auto mx-auto">
+            <div class="card-body">
+                <h1 class="text-center" id="pourcent">Cliquer sur un enseignat</h1>
+            </div>
+        </div>
+
+        <div class="row p-0 m-0">
+            <div class="col-md-6 pe-0 ps-0">
+                <h4 class="list-group-item list-group-item-secondary m-0" aria-current="true">
+                    Enseignants
+                    <button class="btn btn-add add-teacher btn-sm rounded-pill list-group-item-warning float-end" 
+                    data-bs-toggle="modal" data-bs-target="#teacherModal">
+                        + Ajouter
+                    </button>
+                </h4>
+                <ul class="list-group list-group-flush" id="teacher-content">
+                </ul>
+            </div>
+            <div class="col-md-6 pe-0">
+                <h4 class="list-group-item list-group-item-secondary m-0" aria-current="true">
+                    Pourcentage par cours
+                </h4>
+                <ul class="list-group list-group-flush" id="course-content">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+         <!-- Add Teacher modal -->
+            
+    <!-- Modal -->
+    <div class="modal fade" id="teacherModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Ajout d'un enseignant</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form action="" method="POST" id="addStudentForm">
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                        <div class="mt-1 mx-auto">
+                            {{ field.label }} :
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+
+                    <div class="mt-4 float-end">
+                        <button type="button" class="btn list-group-item-danger mx-2" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn list-group-item-success mx-2" id="save-btn">Sauvegarder</button>
+                    </div>
+                    
+                </form>
+                
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+{% endblock dashboardContent %}
+
+
+
+{% block script %}
+    <script type="module" src="{% static 'dashboard/js/teacher.js' %}"></script>
+{% endblock script %}
+    

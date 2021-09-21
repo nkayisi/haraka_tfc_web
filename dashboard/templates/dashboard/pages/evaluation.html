@@ -1,0 +1,115 @@
+{% extends 'dashboard/layouts/_dashboard.html' %}
+
+{% load static %}
+
+{% block dashboardContent %}
+
+    <div id="evaluation-question-res">
+
+        <!-- <div class="search pb-3 mx-auto w-50">
+            <input type="text" class="form-control mx-auto rounded-pill" id="search" placeholder="Rechercher une question par mot clé...">
+        </div> -->
+
+        <div class="row p-0 m-0">
+            <div class="col-md-7 pe-0 ps-0">
+                <h4 class="list-group-item list-group-item-secondary m-0" aria-current="true">
+                    Questions
+                    <button class="btn add-question btn-add btn-sm rounded-pill list-group-item-warning float-end text-dark" 
+                    data-bs-toggle="modal" data-bs-target="#questionModal">
+                        + Ajouter
+                    </button>
+                </h4>
+                <ul class="list-group list-group-flush" id="question-content">
+                </ul>
+            </div>
+            <div class="col-md-5 pe-0">
+                <h4 class="list-group-item list-group-item-secondary m-0" aria-current="true">
+                    Reponses
+                    <button class="btn btn-add add-response btn-sm rounded-pill list-group-item-warning float-end text-dark" 
+                    data-bs-toggle="modal" data-bs-target="#responseModal">
+                        + Ajouter
+                    </button>
+                </h4>
+                <ul class="list-group list-group-flush" id="response-content">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Add question modal -->
+            
+    <!-- Modal -->
+    <div class="modal fade" id="questionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Ajout d'une question d'évaluation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form action="" method="POST" id="addquestionForm">
+                    {% csrf_token %}
+                    
+                    <div class="mt-1 mx-auto">
+                        {{ question_form.question_label.label }} :
+                        {{ question_form.question_label }}
+                    </div>
+
+                    <div class="mt-4 float-end">
+                        <button type="button" class="btn list-group-item-danger mx-2" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn list-group-item-success mx-2" id="save-question-btn">Sauvegarder</button>
+                    </div>
+                    
+                </form>
+                
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+     <!-- Add response modal -->
+            
+    <!-- Modal -->
+    <div class="modal fade" id="responseModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Ajout d'une reponse d'évaluation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form action="" method="POST" id="addResponseForm">
+                    {% csrf_token %}
+                    
+                    {% for field in response_form %}
+                        <div class="mt-1 mx-auto">
+                            {{ field.label }} :
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+
+                    <div class="mt-4 float-end">
+                        <button type="button" class="btn list-group-item-danger mx-2" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn list-group-item-success mx-2" id="save-response-btn">Sauvegarder</button>
+                    </div>
+                    
+                </form>
+                
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+{% endblock dashboardContent %}
+
+{% block script %}
+    <script type="module" src=" {% static 'dashboard/js/quesRes.js' %} "></script>
+    <!-- <script type="module" src=" {% static 'dashboard/js/api_method.js' %} "></script> -->
+{% endblock script %}

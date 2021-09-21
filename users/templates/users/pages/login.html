@@ -1,0 +1,25 @@
+{% extends 'evaluation/layouts/_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+
+    <div class="card-body list-group-item-light mx-auto w-50 p-5 mt-5">
+        <div class="card-body mb-5">
+            <h1 class="text-center">Connexion</h1>
+        </div>
+        <form method="POST" class="w-75 mx-auto">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group mt-5 pt-3 pb-4 text-center">
+                <button type="submit" class="btn btn-outline-info px-5">Connexion</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}
+    

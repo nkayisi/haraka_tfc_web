@@ -1,0 +1,47 @@
+{% extends 'evaluation/layouts/_base.html' %}
+
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+
+        {% include 'evaluation/layouts/_nav.html' %}
+
+        <div class="list-group-item-light w-50 mx-auto pt-5 pb-4">
+
+            <h2 class="text-center mt-3">Bienvenue!</h2>
+
+            <p class="text-center">Veillez entrer votre numéro matricule avant d'évaluer !</p>
+
+            <form class="p-5" id="evaluationForm">
+                {% csrf_token %}
+                <div class="mb-5">
+                    <label for="id_matricule" class="ps-2">Matricule :</label>
+                    <input type="text" required class="form-control rounded-pill" 
+                    placeholder="Numéro matricule" id="id_matricule">
+                    <p class="list-group-item-danger p-2 error text-center small mt-3">Numéro matricule introuvable !</p>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-info px-5 text-white">Evaluer maintenant</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+{% endblock content %}
+
+
+
+{% block script %}
+
+    <script src="{% static 'users/js/home.js' %}"></script>
+    
+{% endblock script %}
+    
+
+    

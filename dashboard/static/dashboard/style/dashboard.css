@@ -1,0 +1,39 @@
+.btn-add:hover {
+    box-shadow: grey 1px 2px 7px;
+    transition: .7s;
+}
+
+.focusList:focus {
+    border: none;
+    background-color: honeydew;
+}
+
+.grey {
+    color: grey;
+}
+
+svg {
+    width: 25px;
+    height: auto;
+}
+
+.active {
+    border-radius: 0 100px 100px 0;
+}
+
+/* .logo {
+    width: 100px;
+    height: auto;
+} */
+
+#logo {
+    width: 30px;
+    height: auto;
+}
+
+.active-link {
+    border-right: 8px solid rgb(211, 123, 22);
+    margin-right: -20px !important;
+    background-color: rgb(198, 212, 212);
+    opacity: .6;
+}
